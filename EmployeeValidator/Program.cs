@@ -107,6 +107,40 @@ namespace EmployeeValidator
             }
         }
 
+        private static bool ValidatePosition(string position)
+        {
+            while (true)
+            {
+                if (position != "HR" && position != "Audit" && position != "Engineer")
+                {
+                    Console.WriteLine("Position must be HR, Audit, or Engineer.");
+                }
+                else
+                {
+                    return true;
+                }
+                Console.Write("Enter Position: ");
+                position = Console.ReadLine();
+            }
+        }
+
+        private static bool ValidateSalary(int salary)
+        {
+            while (true)
+            {
+                if (salary < 1500 || salary > 5000)
+                {
+                    Console.WriteLine("Salary must be between 1500 and 5000.");
+                }
+                else
+                {
+                    return true;
+                }
+                Console.Write("Enter Salary: ");
+                int.TryParse(Console.ReadLine(), out salary);
+            }
+        }
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Enter employee information:");
@@ -126,18 +160,33 @@ namespace EmployeeValidator
             string fin;
             do
             {
-                Console.Write("FIN: ");
+                Console.Write("Enter FIN: ");
                 fin = Console.ReadLine();
             } while (!ValidateFin(fin));
 
             string phone;
             do
             {
-                Console.Write("Phone Number: ");
+                Console.Write("Enter Phone Number: ");
                 phone = Console.ReadLine();
             } while (!ValidatePhone(phone));
 
+            string position;
+            do
+            {
+                Console.Write("Enter Position (HR, Audit, Engineer): ");
+                position = Console.ReadLine();
+            } while (!ValidatePosition(position));
+
+            int salary;
+            do
+            {
+                Console.Write("Enter Salary: ");
+                int.TryParse(Console.ReadLine(), out salary);
+            } while (!ValidateSalary(salary));
+
             Console.WriteLine("All validations passed. Employee information is valid.");
+
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║          Employee Information        ║");
             Console.WriteLine("╠══════════════════════════════════════╣");
@@ -146,6 +195,8 @@ namespace EmployeeValidator
             Console.WriteLine($"║ Father's Name: {fatherName,-21} ║");
             Console.WriteLine($"║ FIN:           {fin,-21} ║");
             Console.WriteLine($"║ Phone Number:  {phone,-21} ║");
+            Console.WriteLine($"║ Position:      {position,-21} ║");
+            Console.WriteLine($"║ Salary:        {salary,-21} ║");
             Console.WriteLine("╚══════════════════════════════════════╝");
         }
     }
